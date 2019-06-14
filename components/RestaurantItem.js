@@ -37,7 +37,7 @@ class RestaurantItem extends Component {
         <CardItem>
           <Left />
           <Body>
-            <Button bordered primary onPress={() => navigate('RestDish', { restId })}>
+            <Button bordered primary onPress={() => navigate('RestDish', { restId, name })}>
               <Text>В заклад</Text>
             </Button>
           </Body>

@@ -8,7 +8,10 @@ const RestaurantNavigator = createStackNavigator({
     screen: HomeScreen
   },
   RestDish: {
-    screen: RestDishScreen
+    screen: RestDishScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: navigation.state.params.name,
+    }),
   }
 });
 

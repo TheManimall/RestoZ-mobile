@@ -17,8 +17,6 @@ class RestDishScreen extends Component {
     const { getDish, navigation } = this.props;
     const restId = navigation.getParam('restId', 'no-id');
 
-    console.log('asdasdasd', restId);
-
     getDish(restId);
   }
 

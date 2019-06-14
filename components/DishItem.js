@@ -22,8 +22,6 @@ class DishItem extends Component {
             <Body>
               <H2>{name}</H2>
               <Text note>{type}</Text>
-              <Text note>{restId}</Text>
-
             </Body>
           </Left>
         </CardItem>
