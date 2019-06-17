@@ -18,7 +18,7 @@ const getAllDishFailure = err => ({
 export const getAllDish = () => async dispatch => {
   dispatch(getAllDishRequest());
   try {
-    const res = await axios.get('http://192.168.100.40:5050/api/dish/all');
+    const res = await axios.get('http://192.168.0.153:5050/api/dish/all');
     dispatch(getAllDishSuccess(res.data));
   } catch (err) {
     dispatch(getAllDishFailure(err));
@@ -42,7 +42,7 @@ const getDishFailure = err => ({
 export const getDish = value => async dispatch => {
   dispatch(getDishRequest());
   try {
-    const res = await axios.get(`http://192.168.100.40:5050/api/dish/get/${value}`);
+    const res = await axios.get(`http://192.168.0.153:5050/api/dish/get/${value}`);
     dispatch(getDishSuccess(res.data));
   } catch (err) {
     console.error(err.response);

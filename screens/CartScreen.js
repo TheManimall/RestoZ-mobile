@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState} from "react";
 import { connect } from 'react-redux';
 import { View } from "react-native";
-import { Container, Header, Content, Card, CardItem, Text, Body, Button } from "native-base";
+import { addOrder } from '../store/actions/cartAction';
+import { Container, Header, Content, Card, CardItem, Text, Body, Button, Item, Label, Input } from "native-base";
 
-const CartScreen = ({ order }) => {
+const CartScreen = ({ order, addOrder }) => {
+
+  const [address, changeAddress] = useState('');
+
+  const addTo = total => ({
+    dishId: order.map(el => el.id),
+    restId: order[0].restId,
+    userId: 'YuriiVovk',
+    address: address,
+    totalPrice: total,
+  })
+
   let sum = 0;
   return(
     <Container>
@@ -14,6 +26,7 @@ const CartScreen = ({ order }) => {
             <Text>Корзина</Text>
           </CardItem>
               {order && order.map(item => {
+                console.log(order);
                 sum += item.price;
                 return(
                   <CardItem key={item.id} >
@@ -21,7 +34,7 @@ const CartScreen = ({ order }) => {
                       <View style={{justifyContent: 'flex-start'}}>
                         <Text>{item.name}</Text>
                       </View>
-                      <View style={{justifyContent: 'flex-end'}}>
+                      <View>
                         <Text>{item.price}</Text>
                       </View>
                     </Body>
@@ -36,7 +49,18 @@ const CartScreen = ({ order }) => {
           </CardItem>
         </Card>
         <View>
-          <Button bordered dark style={{flex: 1, justifyContent: 'center', alignSelf: 'center', marginTop: 10}}>
+          <Item stackedLabel>
+            <Label>Вкажіть місце доставки доставки</Label>
+            <Input 
+              onChangeText={(text) => changeAddress(text)}
+              value={address}
+            />
+          </Item>
+        </View>
+        <View>
+          <Button 
+            onPress={() => addOrder(addTo(sum))}
+            bordered dark style={{flex: 1, justifyContent: 'center', alignSelf: 'center', marginTop: 10}}>
             <Text>Оформити замовлення</Text>
           </Button>
         </View>
@@ -48,5 +72,6 @@ const CartScreen = ({ order }) => {
 export default connect(
   state=>({
     order: state.cart.order
-  })
+  }),
+  { addOrder }
 )(CartScreen);

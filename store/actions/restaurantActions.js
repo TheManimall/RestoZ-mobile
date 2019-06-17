@@ -18,7 +18,7 @@ const getAllRestaurantFailure = err => ({
 export const getAllRestaurant = () => async dispatch => {
   dispatch(getAllRestaurantRequest());
   try {
-    const res = await axios.get('http://192.168.100.40:5050/api/restaurant/all');
+    const res = await axios.get('http://192.168.0.153:5050/api/restaurant/all');
     dispatch(getAllRestaurantSuccess(res.data));
   } catch (err) {
     dispatch(getAllRestaurantFailure(err));

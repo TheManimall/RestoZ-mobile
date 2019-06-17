@@ -18,9 +18,11 @@ const addOrderFailure = err => ({
 });
 
 export const addOrder = data => async dispatch => {
+  console.log(data)
   try {
-    const res = await axios.post('http://192.168.100.40:5050/api/order/add', data);
+    const res = await axios.post('http://192.168.0.153:5050/api/order/add', data);
     dispatch(signUpSuccess(res.data));
+    console.log(res.data)
   } catch (err) {
     dispatch(signUpFailure(err));
   }

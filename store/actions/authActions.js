@@ -14,13 +14,14 @@ const signInFailure = err => ({
 
 export const signIn = data => async dispatch => {
   try {
-    const res = await axios.post('http://192.168.100.40:5050/api/user/login', data);
+    const res = await axios.post('http://192.168.0.153:5050/api/user/login', data);
     dispatch(signInSuccess(res.data));
   } catch (err) {
     dispatch(signInFailure(err));
   }
 };
 
+// 192.168.0.153
 const signUpSuccess = data => ({
   type: Types.SIGN_UP_SUCCESS,
   payload: data
@@ -33,8 +34,9 @@ const signUpFailure = err => ({
 
 export const signUp = data => async dispatch => {
   try {
-    const res = await axios.post('http://192.168.100.40:5050/api/user/register', data);
+    const res = await axios.post('http://192.168.0.153:5050/api/user/register', data);
     dispatch(signUpSuccess(res.data));
+    console.log(res.data);
   } catch (err) {
     dispatch(signUpFailure(err));
   }

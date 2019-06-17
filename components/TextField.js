@@ -1,20 +1,19 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { Item, Input, Label } from "native-base";
 
-const TextField = ({ input, label, type }) => (
+const TextField = ({ input, label, type, meta: { touched, error, warning } }) => (
   <View>
     <Item stackedLabel>
       <Label>{label}</Label>
       <Input
         {...input}
         type={type}
-        // onChangeText={input.onChange}
-        // onBlur={input.onBlur}
-        // onFocus={input.onFocus}
-        // value={input.value}
+        secureTextEntry={type === 'password' ? true: false}
       />
     </Item>
+    {touched && ((error && <Text style={{marginLeft: 40, color: 'red', marginTop: 10}}>{error}</Text>) || (warning && <Text>{warning}</Text>))}
+
   </View>
 );
 

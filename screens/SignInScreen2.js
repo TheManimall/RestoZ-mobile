@@ -20,6 +20,7 @@ import {
 } from "native-base";
 import TextField from "../components/TextField";
 import { signIn } from "../store/actions/authActions";
+import { required, email } from './validations';
 
 class SignInScreen2 extends Component {
   constructor(props) {
@@ -28,9 +29,12 @@ class SignInScreen2 extends Component {
   }
 
   _handleSubmit = values => {
-    const { handleSubmit, SignIn } = this.props;
+    const { handleSubmit, SignIn, navigation: { navigate } } = this.props;
 
-    return(handleSubmit(SignIn));
+    return 
+      handleSubmit(SignIn(values));
+      console.log('asd');
+      navigate("Home");
   };
 
   render() {
@@ -45,18 +49,20 @@ class SignInScreen2 extends Component {
           <Right />
         </Header>
         <Content contentContainerStyle={{ justifyContent: "center", flex: 1 }}>
-          <Form>
+          <Form onSubmit={this._handleSubmit}>
             <Field
               name="email"
               type="email"
               label="email"
               component={TextField}
+              validate={[ required, email ]}
             />
             <Field
               name="password"
               type="password"
               label="пароль"
               component={TextField}
+              validate={[ required ]}
             />
             <Button
               style={styles.button}
